@@ -7,6 +7,19 @@ const url = require('url');
 const PORT = process.env.PORT || 3000;
 const API_KEY = process.env.ANTHROPIC_API_KEY || '';
 
+function findFile(filePath, callback) {
+  const publicPath = path.join(__dirname, 'public', filePath);
+  const rootPath = path.join(__dirname, filePath);
+  
+  fs.readFile(publicPath, (err, content) => {
+    if (!err) return callback(null, content, publicPath);
+    fs.readFile(rootPath, (err2, content2) => {
+      if (!err2) return callback(null, content2, rootPath);
+      callback(new Error('Not found'));
+    });
+  });
+}
+
 const server = http.createServer((req, res) => {
   const parsedUrl = url.parse(req.url);
 
@@ -65,16 +78,15 @@ const server = http.createServer((req, res) => {
   }
 
   if (req.method === 'GET') {
-    let filePath = parsedUrl.pathname === '/' ? '/index.html' : parsedUrl.pathname;
-    filePath = path.join(__dirname, 'public', filePath);
+    let filePath = parsedUrl.pathname === '/' ? 'index.html' : parsedUrl.pathname.replace(/^\//, '');
 
-    fs.readFile(filePath, (err, content) => {
+    findFile(filePath, (err, content, resolvedPath) => {
       if (err) {
         res.writeHead(404);
         res.end('Not found');
         return;
       }
-      const ext = path.extname(filePath);
+      const ext = path.extname(resolvedPath);
       const mime = ext === '.html' ? 'text/html' : ext === '.css' ? 'text/css' : ext === '.js' ? 'application/javascript' : 'text/plain';
       res.writeHead(200, { 'Content-Type': mime });
       res.end(content);
