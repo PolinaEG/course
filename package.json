@@ -1,0 +1,12 @@
+{
+  "name": "school-course-agent",
+  "version": "1.0.0",
+  "description": "Школа: инструкция по применению — курс-агент",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

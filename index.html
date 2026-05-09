@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Школа: инструкция по применению</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f4f0; min-height: 100vh; display: flex; justify-content: center; padding: 2rem 1rem; }
+#app { width: 100%; max-width: 680px; }
+.header { display: flex; align-items: center; gap: 10px; margin-bottom: 1.5rem; }
+.header-icon { width: 36px; height: 36px; border-radius: 8px; background: #EEEDFE; display: flex; align-items: center; justify-content: center; }
+.header-icon i { font-size: 18px; color: #3C3489; }
+.title { font-size: 18px; font-weight: 500; color: #1a1a1a; }
+.subtitle { font-size: 13px; color: #888; }
+.toc-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #666; background: none; border: 0.5px solid #ddd; border-radius: 8px; padding: 6px 12px; cursor: pointer; margin-bottom: 1rem; }
+.toc-btn:hover { background: #f0efeb; }
+.toc-panel { background: #fff; border: 0.5px solid #ddd; border-radius: 12px; padding: 1rem; margin-bottom: 1rem; }
+.toc-panel h3 { font-size: 14px; font-weight: 500; color: #888; margin-bottom: 10px; }
+.toc-item { display: flex; align-items: flex-start; gap: 8px; padding: 7px 10px; border-radius: 8px; cursor: pointer; font-size: 14px; color: #1a1a1a; }
+.toc-item:hover { background: #f5f4f0; }
+.toc-num { font-size: 12px; color: #bbb; min-width: 18px; padding-top: 1px; }
+.toc-done { color: #1D9E75; font-size: 14px; }
+.chat-area { min-height: 200px; margin-bottom: 1rem; }
+.msg { margin-bottom: 1rem; }
+.msg-agent { background: #f0efeb; border-radius: 0 12px 12px 12px; padding: 1rem 1.25rem; font-size: 15px; line-height: 1.7; color: #1a1a1a; }
+.msg-user { text-align: right; }
+.msg-user-bubble { display: inline-block; background: #EEEDFE; color: #3C3489; border-radius: 12px 0 12px 12px; padding: 10px 16px; font-size: 14px; max-width: 85%; text-align: left; }
+.question-card { margin-top: 1rem; background: #fff; border: 0.5px solid #ddd; border-radius: 12px; padding: 1rem 1.25rem; }
+.question-label { font-size: 12px; color: #bbb; margin-bottom: 6px; display: flex; align-items: center; gap: 4px; }
+.question-text { font-size: 14px; color: #1a1a1a; font-weight: 500; line-height: 1.5; }
+.nav-btns { display: flex; gap: 8px; margin-top: 1rem; flex-wrap: wrap; }
+.btn-next { display: inline-flex; align-items: center; gap: 6px; background: #3C3489; color: #fff; border: none; border-radius: 8px; padding: 9px 18px; font-size: 14px; cursor: pointer; }
+.btn-next:hover { background: #26215C; }
+.btn-outline { display: inline-flex; align-items: center; gap: 6px; background: none; color: #666; border: 0.5px solid #ddd; border-radius: 8px; padding: 9px 18px; font-size: 14px; cursor: pointer; }
+.btn-outline:hover { background: #f0efeb; }
+.input-row { display: flex; gap: 8px; margin-top: 12px; }
+.input-row input { flex: 1; font-size: 14px; padding: 9px 14px; border-radius: 8px; border: 0.5px solid #ddd; background: #fff; color: #1a1a1a; outline: none; }
+.input-row input:focus { border-color: #7F77DD; }
+.input-row button { background: #3C3489; color: #fff; border: none; border-radius: 8px; padding: 9px 14px; cursor: pointer; font-size: 15px; }
+.input-row button:hover { background: #26215C; }
+.loading { color: #888; font-size: 14px; padding: 0.5rem 0; display: flex; align-items: center; gap: 8px; }
+.dots span { animation: blink 1.2s infinite; display: inline-block; }
+.dots span:nth-child(2) { animation-delay: 0.2s; }
+.dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes blink { 0%,80%,100%{opacity:0.2} 40%{opacity:1} }
+.progress-bar { height: 3px; background: #e5e5e5; border-radius: 2px; margin-bottom: 1rem; }
+.progress-fill { height: 3px; background: #7F77DD; border-radius: 2px; transition: width 0.4s; }
+.progress-label { font-size: 12px; color: #bbb; margin-bottom: 6px; }
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="header">
+    <div class="header-icon"><i class="ti ti-school"></i></div>
+    <div>
+      <div class="title">Школа: инструкция по применению</div>
+      <div class="subtitle">Интерактивный курс для родителей будущих первоклассников</div>
+    </div>
+  </div>
+  <div class="progress-label" id="progress-label">Раздел 1 из 7</div>
+  <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:14%"></div></div>
+  <button class="toc-btn" onclick="toggleToc()"><i class="ti ti-list"></i> Оглавление курса</button>
+  <div class="toc-panel" id="toc-panel" style="display:none">
+    <h3>Разделы курса</h3>
+    <div id="toc-list"></div>
+  </div>
+  <div class="chat-area" id="chat-area"></div>
+  <div id="input-area"></div>
+</div>
+<script>
+const SECTIONS = [
+  { id:0, title:"Что такое готовность к школе?", content:`Готовность к школе — это не то, сколько букв знает ребёнок. Это сложное «созревание»: эмоциональное, психологическое и физическое.\n\nМногие родители думают, что главное — научить читать и считать. Но ребёнок, который «прошёл» программу начальной школы заранее, рискует быстро потерять мотивацию: скучно там, где всё уже знаешь.\n\nГотовность к школе — как умение спать всю ночь или пользоваться горшком: она созревает сама, по мере роста. Идеальная формула старта в школе: готовый ребёнок, спокойный коллектив и чуткий учитель. Но идеал практически недостижим — и это нормально.`, question:"Что для вас лично кажется самым важным в понятии «готовность к школе»?" },
+  { id:1, title:"Компоненты готовности: 4 составляющих", content:`Психологи выделяют 4 основных составляющих готовности к школе:\n\n🔷 Интеллектуальная готовность — образное и словесно-логическое мышление, кругозор, монологическая речь.\n\n🔷 Личностная готовность — принятие роли школьника, желание учиться, умение подчинять свои импульсы заданию взрослого.\n\n🔷 Социально-психологическая готовность — умение общаться со сверстниками и взрослыми, следовать правилам, договариваться.\n\n🔷 Эмоционально-волевая готовность — управление своим вниманием и поведением, способность довести дело до конца.\n\nПлюс физиологическая зрелость: мозг буквально должен дозреть до того, чтобы выполнять учебные задачи.`, question:"Какая из 4 составляющих кажется вам наиболее развитой у вашего ребёнка?" },
+  { id:2, title:"Диагностика: кризис 6–7 лет и тест на произвольность", content:`К 7 годам формируется произвольность — способность сидеть, слушать и выполнять задачу, даже неинтересную.\n\nПризнаки кризиса 6–7 лет (хороший знак!):\n— Непослушание, строптивость\n— Хочет казаться взрослее, отказывается от «детских» игр\n— Дерзит, говорит «да что ты понимаешь»\n— Подражает взрослым манерам\n\nТест «Бусы»: попросите нарисовать 12 бусин — красную, синюю, красную, синюю... Без игровой мотивации.\n✔ Взялся и завершил — отлично\n✔ Соблюл чередование — хорошо распределяет внимание\n◻ Отказался — нормально, если меньше 6,5 лет\n\nФизиологический тест: дотянуться правой рукой до левого уха через голову. Получается — мозг «дозревает».`, question:"Попробовали тест с бусами или «ухо через голову»? Что заметили?" },
+  { id:3, title:"Какие бывают школы", content:`В России существует несколько типов школ:\n\n🏫 Государственная — следует ФГОС, обязательные экзамены, стандартная программа.\n🌿 Вальдорфская — творчество, искусство, один учитель до 7–8 класса, нет оценок в баллах.\n🌍 IB PYP — международная программа, исследовательский подход, несколько языков.\n📚 Cambridge Primary — международные стандарты, упор на математику и английский.\n📖 Русская классическая — гуманитарный уклон, литература, история, философия.\n🗳 Демократическая — ученики участвуют в управлении, самостоятельно планируют обучение.\n🎨 Монтессори — индивидуальный темп, специальные материалы, смешанный возраст.\n🖼 Реджио-Эмилия — проектное обучение, визуальное искусство, среда как учитель.`, question:"Какой тип школы вам ближе или уже выбран? Что в нём привлекает больше всего?" },
+  { id:4, title:"Аттестация: какие бывают форматы", content:`В российской школе несколько видов аттестации:\n\n📋 Текущая — весь год: опросы, контрольные, самостоятельные работы.\n📋 Промежуточная — по итогам четверти или семестра.\n📋 Итоговая:\n— ОГЭ для 9 класса\n— ЕГЭ для 11 класса\nОбязательны для аттестата и влияют на поступление в вузы.\n🏆 Внеурочная — олимпиады, конкурсы, научные проекты.\n\nВ начальной школе (1–4 классы) итоговых государственных экзаменов нет.`, question:"Вас беспокоит тема оценок и аттестации? Что именно хочется понять лучше?" },
+  { id:5, title:"Этапы адаптации к школе", content:`Адаптация проходит через несколько стадий:\n\n1️⃣ Шок, отрицание — «Не пойду в школу!» Не спорьте — читайте хорошие книги о школе.\n2️⃣ Осознание необходимости — рутина давит, ребёнок может стать агрессивнее. Важно дать выход напряжению.\n3️⃣ Торг — «А давай учиться дома?», «Зачем вообще школа?» Это поиск смысла.\n4️⃣ Печаль — скучает по дошкольному детству и свободе. Это естественно.\n5️⃣ Принятие — открывает плюсы: друзья, любимый учитель, переменки. Школа становится «своей».\n\n⚠️ Если ребёнок застревает на одной стадии надолго — повод обратиться к специалисту.`, question:"На какой стадии адаптации находится сейчас ваш ребёнок?" },
+  { id:6, title:"Итог курса и рекомендации", content:`Вы прошли основные разделы курса. Вот что важно помнить:\n\n✅ Готовность к школе — это зрелость, а не натаскивание. Игра и общение развивают мозг лучше, чем ранние занятия.\n✅ Идеального старта не бывает. Но внимательный учитель и спокойная атмосфера дома — реально в наших силах.\n✅ Адаптация — процесс с предсказуемыми стадиями. Знание о них помогает сохранять спокойствие.\n✅ Выбор школы — не раз и навсегда. Главное — понять, что важно именно вашему ребёнку.\n✅ Любая нестандартная ситуация — повод не паниковать, а обратиться за помощью.\n\nЕсли хотите вернуться к разделу — используйте оглавление. Или задайте вопрос! 👇`, question:null }
+];
+
+let currentSection=0, completed=new Set(), tocOpen=false, isLoading=false, conversationHistory=[];
+
+function toggleToc(){tocOpen=!tocOpen;document.getElementById('toc-panel').style.display=tocOpen?'block':'none';renderToc();}
+function renderToc(){document.getElementById('toc-list').innerHTML=SECTIONS.map((s,i)=>`<div class="toc-item" onclick="goToSection(${i})"><span class="toc-num">${i+1}</span><span style="flex:1">${s.title}</span>${completed.has(i)?'<i class="ti ti-check toc-done"></i>':''}</div>`).join('');}
+function goToSection(idx){currentSection=idx;tocOpen=false;document.getElementById('toc-panel').style.display='none';document.getElementById('chat-area').innerHTML='';conversationHistory=[];showSection(idx);}
+function updateProgress(){const pct=Math.round(((currentSection+1)/SECTIONS.length)*100);document.getElementById('progress-fill').style.width=pct+'%';document.getElementById('progress-label').textContent=`Раздел ${currentSection+1} из ${SECTIONS.length}`;}
+function appendMsg(html,type){const area=document.getElementById('chat-area');const div=document.createElement('div');div.className='msg';div.innerHTML=type==='agent'?`<div class="msg-agent">${html}</div>`:`<div class="msg-user"><div class="msg-user-bubble">${html}</div></div>`;area.appendChild(div);div.scrollIntoView({behavior:'smooth',block:'end'});return div;}
+function showSection(idx){updateProgress();const s=SECTIONS[idx];appendMsg(s.content.replace(/\n/g,'<br>'),'agent');if(s.question){const area=document.getElementById('chat-area');const qDiv=document.createElement('div');qDiv.className='msg';qDiv.innerHTML=`<div class="question-card"><div class="question-label"><i class="ti ti-message-circle"></i> Вопрос для рефлексии</div><div class="question-text">${s.question}</div></div>`;area.appendChild(qDiv);}renderInputArea();}
+function renderInputArea(){const isLast=currentSection===SECTIONS.length-1;document.getElementById('input-area').innerHTML=`<div class="nav-btns">${!isLast?`<button class="btn-next" onclick="nextSection()"><i class="ti ti-arrow-right"></i> Следующий раздел</button>`:''} ${currentSection>0?`<button class="btn-outline" onclick="prevSection()"><i class="ti ti-arrow-left"></i> Назад</button>`:''}</div><div class="input-row"><input type="text" id="user-input" placeholder="Задайте вопрос по теме курса..." onkeydown="if(event.key==='Enter')sendQuestion()"/><button onclick="sendQuestion()">↗</button></div>`;}
+function nextSection(){completed.add(currentSection);if(currentSection<SECTIONS.length-1){currentSection++;document.getElementById('chat-area').innerHTML='';conversationHistory=[];showSection(currentSection);}}
+function prevSection(){if(currentSection>0){currentSection--;document.getElementById('chat-area').innerHTML='';conversationHistory=[];showSection(currentSection);}}
+
+async function sendQuestion(){
+  const input=document.getElementById('user-input');
+  const text=input.value.trim();
+  if(!text||isLoading)return;
+  input.value='';
+  appendMsg(text,'user');
+  const loadDiv=document.createElement('div');
+  loadDiv.className='msg';
+  loadDiv.innerHTML=`<div class="msg-agent loading"><span>Думаю</span><span class="dots"><span>.</span><span>.</span><span>.</span></span></div>`;
+  document.getElementById('chat-area').appendChild(loadDiv);
+  loadDiv.scrollIntoView({behavior:'smooth',block:'end'});
+  isLoading=true;
+  const s=SECTIONS[currentSection];
+  const systemPrompt=`Ты — дружелюбный помощник-тьютор курса «Школа: инструкция по применению» для родителей будущих первоклассников в России. Курс охватывает: готовность к школе, диагностику, виды школ, аттестацию, этапы адаптации. Сейчас раздел: "${s.title}". Отвечай только в рамках курса, тепло и кратко (2–5 предложений), на русском языке.`;
+  conversationHistory.push({role:'user',content:text});
+  try{
+    const resp=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:systemPrompt,messages:conversationHistory})});
+    const data=await resp.json();
+    const answer=data.content&&data.content[0]?data.content[0].text:'Не удалось получить ответ.';
+    conversationHistory.push({role:'assistant',content:answer});
+    loadDiv.remove();
+    appendMsg(answer.replace(/\n/g,'<br>'),'agent');
+  }catch(e){loadDiv.remove();appendMsg('Что-то пошло не так. Попробуйте ещё раз.','agent');}
+  isLoading=false;
+}
+
+showSection(0);renderToc();
+</script>
+</body>
+</html>
